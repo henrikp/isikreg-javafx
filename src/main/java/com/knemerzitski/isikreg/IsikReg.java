@@ -963,12 +963,14 @@ public class IsikReg {
     });
     personMenu.getItems().add(newRegistration);
 
-    MenuItem clearAllRegistrations = new MenuItem("Tühista kõik registreerimised");
-    clearAllRegistrations.setOnAction(e -> personListHelper.deleteAllRegistrationsConfirm(() -> {
-      registrationTableView.getSelectionModel().clearSelection();
-    }));
-    personMenu.getItems().add(clearAllRegistrations);
-
+    if (settings.general.clearRegistration) {
+      // Registreerimised
+      MenuItem clearAllRegistrations = new MenuItem("Tühista kõik registreerimised");
+      clearAllRegistrations.setOnAction(e -> personListHelper.deleteAllRegistrationsConfirm(() -> {
+        registrationTableView.getSelectionModel().clearSelection();
+      }));
+      personMenu.getItems().add(clearAllRegistrations);
+    }
     if (settings.general.deletePerson) {
       // Nimekiri
       MenuItem clearPersonList = new MenuItem("Kustuta kõik isikud ja registreerimised");

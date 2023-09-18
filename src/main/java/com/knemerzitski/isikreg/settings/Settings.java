@@ -205,6 +205,7 @@ public class Settings {
     public boolean insertPerson = true;
     public boolean updatePerson = true;
     public boolean deletePerson = true;
+    public boolean clearRegistration = true;
 
     public boolean warnDuplicateRegistrationDate = true;
 

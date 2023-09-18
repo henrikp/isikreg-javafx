@@ -273,7 +273,7 @@ public class PersonListHelper {
 
   public boolean deleteAllRegistrationsConfirm(@NotNull Runnable beforeDelete) {
     ObservableList<Person> list = personList.getUnmodifiableList();
-    if (list.isEmpty() || list.stream().noneMatch(p -> p.getRegistrations().stream().anyMatch(Registration::isRegistered)))
+    if (!settings.general.clearRegistration || list.isEmpty() || list.stream().noneMatch(p -> p.getRegistrations().stream().anyMatch(Registration::isRegistered)))
       return true;
 
     if (settings.dialogHandler.confirm("Oled kindel, et tahad registreerimised tühistada?", "Tühistan registreerimised?")) {
