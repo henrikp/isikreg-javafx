@@ -963,12 +963,14 @@ public class IsikReg {
     });
     personMenu.getItems().add(newRegistration);
 
-    MenuItem clearAllRegistrations = new MenuItem("Tühista kõik registreerimised");
-    clearAllRegistrations.setOnAction(e -> personListHelper.deleteAllRegistrationsConfirm(() -> {
-      registrationTableView.getSelectionModel().clearSelection();
-    }));
-    personMenu.getItems().add(clearAllRegistrations);
-
+    if (settings.general.clearRegistration) {
+      // Registreerimised
+      MenuItem clearAllRegistrations = new MenuItem("Tühista kõik registreerimised");
+      clearAllRegistrations.setOnAction(e -> personListHelper.deleteAllRegistrationsConfirm(() -> {
+        registrationTableView.getSelectionModel().clearSelection();
+      }));
+      personMenu.getItems().add(clearAllRegistrations);
+    }
     if (settings.general.deletePerson) {
       // Nimekiri
       MenuItem clearPersonList = new MenuItem("Kustuta kõik isikud ja registreerimised");
@@ -1006,9 +1008,11 @@ public class IsikReg {
       selectedRowsMenu.getItems().add(updatePersonalCode);
     }
 
-    MenuItem removeSelectedRegistrations = new MenuItem("Tühista registreerimised");
-    removeSelectedRegistrations.setOnAction(e -> deleteSelectedRegistrations());
-    selectedRowsMenu.getItems().add(removeSelectedRegistrations);
+    if (settings.general.clearRegistration) {
+      MenuItem removeSelectedRegistrations = new MenuItem("Tühista registreerimised");
+      removeSelectedRegistrations.setOnAction(e -> deleteSelectedRegistrations());
+      selectedRowsMenu.getItems().add(removeSelectedRegistrations);
+    }
 
     if (settings.general.deletePerson) {
       MenuItem deleteSelectedPeople = new MenuItem("Kustuta isikud");
@@ -1092,9 +1096,11 @@ public class IsikReg {
       contextMenu.getItems().add(updatePersonalCode);
     }
 
-    MenuItem removeSelectedRegistrations = new MenuItem("Tühista registreerimised");
-    removeSelectedRegistrations.setOnAction(e -> deleteSelectedRegistrations());
-    contextMenu.getItems().add(removeSelectedRegistrations);
+    if (settings.general.clearRegistration) {
+      MenuItem removeSelectedRegistrations = new MenuItem("Tühista registreerimised");
+      removeSelectedRegistrations.setOnAction(e -> deleteSelectedRegistrations());
+      contextMenu.getItems().add(removeSelectedRegistrations);
+    }
 
     if (settings.general.deletePerson) {
       MenuItem deleteSelectedPeople = new MenuItem("Kustuta isikud");
